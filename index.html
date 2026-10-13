@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Expense Tracker</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #222; background: #fff; }
+  h1 { font-size: 1.6rem; }
+  section { margin: 1.5rem 0; }
+  form { display: grid; gap: .5rem; }
+  input, select, button { padding: .5rem; font-size: 1rem; }
+  table { width: 100%; border-collapse: collapse; }
+  td, th { border-bottom: 1px solid #ddd; padding: .4rem; text-align: left; }
+  .chart-box { max-width: 420px; }
+</style>
+</head>
+<body>
+<h1>Expense Tracker (₸ KZT)</h1>
+<section id="form-section"></section>
+<section id="list-section"></section>
+<section><h2>Spending by category</h2><div class="chart-box"><canvas id="category-chart"></canvas></div></section>
+<section><h2>Spending by month</h2><div class="chart-box"><canvas id="month-chart"></canvas></div></section>
+</body>
+</html>
