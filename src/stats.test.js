@@ -15,3 +15,18 @@ describe('totalsByCategory', () => {
     expect(totalsByCategory([])).toEqual({});
   });
 });
+
+import { totalsByMonth } from './stats.js';
+
+describe('totalsByMonth', () => {
+  it('sums amounts per month, sorted oldest to newest', () => {
+    const list = [
+      { date: '2026-10-05', amount: 100 },
+      { date: '2026-09-30', amount: 40 },
+      { date: '2026-10-20', amount: 60 },
+    ];
+    const result = totalsByMonth(list);
+    expect(result).toEqual({ '2026-09': 40, '2026-10': 160 });
+    expect(Object.keys(result)).toEqual(['2026-09', '2026-10']);
+  });
+});
