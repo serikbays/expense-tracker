@@ -31,3 +31,28 @@ describe('addExpense', () => {
     expect(CATEGORIES).toEqual(['Food', 'Rent', 'Transport', 'Books', 'Fun', 'Other']);
   });
 });
+
+import { updateExpense, deleteExpense } from './storage.js';
+
+describe('updateExpense and deleteExpense', () => {
+  it('updates the fields of an existing expense', () => {
+    const s = fakeStore();
+    const e = addExpense({ amount: '100', category: 'Fun', date: '2026-10-02', note: 'a' }, s);
+    updateExpense(e.id, { amount: '250', category: 'Books', date: '2026-10-03', note: 'b' }, s);
+    expect(loadExpenses(s)[0]).toMatchObject({ amount: 250, category: 'Books', date: '2026-10-03', note: 'b' });
+  });
+
+  it('rejects an invalid update and keeps the old data', () => {
+    const s = fakeStore();
+    const e = addExpense({ amount: '100', category: 'Fun', date: '2026-10-02' }, s);
+    expect(() => updateExpense(e.id, { amount: '0' }, s)).toThrow();
+    expect(loadExpenses(s)[0].amount).toBe(100);
+  });
+
+  it('deletes an expense', () => {
+    const s = fakeStore();
+    const e = addExpense({ amount: '100', category: 'Fun', date: '2026-10-02' }, s);
+    deleteExpense(e.id, s);
+    expect(loadExpenses(s)).toHaveLength(0);
+  });
+});

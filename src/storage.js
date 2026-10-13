@@ -35,3 +35,18 @@ export function addExpense(data, store) {
   save(list, store);
   return item;
 }
+
+export function updateExpense(id, data, store) {
+  const list = loadExpenses(store);
+  const i = list.findIndex((e) => e.id === id);
+  if (i === -1) throw new Error('Expense not found');
+  const next = { ...list[i], ...data, amount: Number(data.amount ?? list[i].amount) };
+  validate(next);
+  list[i] = next;
+  save(list, store);
+  return next;
+}
+
+export function deleteExpense(id, store) {
+  save(loadExpenses(store).filter((e) => e.id !== id), store);
+}
